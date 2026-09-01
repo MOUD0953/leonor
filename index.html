@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Place For You ♡</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Pacifico&display=swap');
+
+  :root{
+    --bg:#09051c;
+    --bg2:#160b31;
+    --pink:#ff75b9;
+    --pink2:#ffb5dc;
+    --purple:#9d63e8;
+    --text:#fff3fb;
+    --muted:#d9c8e9;
+    --glass:rgba(42,20,70,.62);
+    --line:rgba(255,170,220,.35);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    min-height:100vh;
+    color:var(--text);
+    font-family:Comfortaa,system-ui,sans-serif;
+    background:
+      radial-gradient(circle at 15% 15%,rgba(157,99,232,.25),transparent 25%),
+      radial-gradient(circle at 85% 35%,rgba(255,117,185,.15),transparent 25%),
+      linear-gradient(180deg,#070417 0%,#120827 48%,#09051c 100%);
+    overflow-x:hidden;
+  }
+
+  /* Stars */
+  .stars,.stars:before,.stars:after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+    background-image:
+      radial-gradient(circle,rgba(255,255,255,.95) 0 1px,transparent 1.5px),
+      radial-gradient(circle,rgba(255,181,220,.8) 0 1px,transparent 1.5px),
+      radial-gradient(circle,rgba(255,255,255,.7) 0 1.2px,transparent 1.7px);
+    background-size: 97px 97px, 151px 151px, 211px 211px;
+    background-position: 12px 25px, 43px 72px, 90px 10px;
+    opacity:.55;
+  }
+  .stars:before{transform:scale(1.3);opacity:.25;animation:twinkle 5s infinite alternate}
+  .stars:after{transform:scale(.8);opacity:.35;animation:twinkle 3.2s infinite alternate-reverse}
+  @keyframes twinkle{from{opacity:.18}to{opacity:.65}}
+
+  .container{width:min(1120px,92%);margin:auto}
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:24px 0;
+  }
+  .brand{font-weight:700;letter-spacing:.4px}
+  .brand span{color:var(--pink);font-size:1.35rem}
+  .music-btn,.btn{
+    border:1px solid var(--line);
+    color:white;
+    background:linear-gradient(135deg,rgba(255,117,185,.2),rgba(157,99,232,.25));
+    border-radius:999px;
+    padding:12px 18px;
+    cursor:pointer;
+    font:inherit;
+    transition:.25s;
+    box-shadow:0 8px 30px rgba(0,0,0,.2);
+  }
+  .music-btn:hover,.btn:hover{transform:translateY(-2px);border-color:var(--pink)}
+
+  .hero{
+    min-height:630px;
+    display:grid;grid-template-columns:1fr 1fr;
+    align-items:center;gap:35px;
+    padding:35px 0 60px;
+  }
+  .eyebrow{color:var(--pink2);font-size:.95rem;margin-bottom:15px}
+  h1{
+    font-family:Pacifico,cursive;
+    font-size:clamp(3.2rem,7vw,6.5rem);
+    line-height:1.05;margin:0 0 24px;
+    font-weight:400;
+    text-shadow:0 0 35px rgba(255,117,185,.22);
+  }
+  h1 span{color:var(--pink)}
+  .hero p{font-size:1.12rem;line-height:1.9;color:var(--muted);max-width:600px}
+  .hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .primary{
+    background:linear-gradient(135deg,#ff5ca9,#9d63e8);
+    border:0;padding:15px 23px;
+    box-shadow:0 12px 35px rgba(255,92,169,.24);
+  }
+  .secondary{background:rgba(255,255,255,.06)}
+
+  .sky-art{position:relative;height:470px;display:flex;align-items:center;justify-content:center}
+  .moon{
+    width:230px;height:230px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff7ff,#ffd5ea 45%,#b879db 100%);
+    box-shadow:0 0 70px rgba(255,200,235,.32);
+    position:relative;
+  }
+  .moon:before,.moon:after{
+    content:"";position:absolute;border-radius:50%;
+    background:rgba(145,84,172,.12);
+  }
+  .moon:before{width:42px;height:42px;left:45px;top:55px}
+  .moon:after{width:65px;height:65px;right:38px;bottom:40px}
+  .heart{
+    position:absolute;color:var(--pink);font-size:2rem;
+    animation:float 4s ease-in-out infinite;
+  }
+  .heart.h1{top:50px;right:25%;animation-delay:.3s}
+  .heart.h2{bottom:90px;left:12%;font-size:1.3rem;animation-delay:1.2s}
+  .heart.h3{top:125px;left:10%;font-size:1rem;animation-delay:2s}
+  .cat{
+    position:absolute;bottom:20px;right:8%;
+    font-size:8rem;filter:drop-shadow(0 12px 18px rgba(0,0,0,.35));
+    animation:catFloat 4s ease-in-out infinite;
+  }
+  .cloud{
+    position:absolute;bottom:55px;left:0;font-size:4.5rem;opacity:.55;
+    animation:cloud 15s linear infinite;
+  }
+  @keyframes float{50%{transform:translateY(-15px) rotate(8deg)}}
+  @keyframes catFloat{50%{transform:translateY(-8px)}}
+  @keyframes cloud{50%{transform:translateX(100px)}}
+
+  section{padding:45px 0}
+  .section-title{text-align:center;font-family:Pacifico,cursive;font-size:2.5rem;font-weight:400;margin:0 0 12px}
+  .section-sub{text-align:center;color:var(--muted);margin:0 auto 28px;max-width:650px;line-height:1.7}
+
+  .glass{
+    background:var(--glass);
+    border:1px solid var(--line);
+    border-radius:28px;
+    box-shadow:0 20px 70px rgba(0,0,0,.28);
+    backdrop-filter:blur(12px);
+  }
+
+  .surprise{
+    padding:34px;
+    text-align:center;
+  }
+  #surpriseText{font-size:1.35rem;line-height:1.8;min-height:80px;display:grid;place-items:center;color:#ffe2f2}
+  .small{font-size:.82rem;color:#bca7d0}
+
+  .bad-day{
+    display:grid;grid-template-columns:130px 1fr auto;align-items:center;gap:25px;
+    padding:28px 32px;margin-top:25px;
+  }
+  .cloudy{font-size:5rem;text-align:center}
+  .bad-day h3{margin:0 0 8px;font-size:1.5rem}
+  .bad-day p{margin:0;color:var(--muted);line-height:1.6}
+
+  .countdown{
+    margin-top:25px;padding:30px;
+    display:flex;justify-content:center;gap:clamp(12px,4vw,45px);flex-wrap:wrap;
+    text-align:center;
+  }
+  .time-box strong{display:block;font-size:clamp(2rem,5vw,3.2rem);color:var(--pink2)}
+  .time-box span{color:var(--muted);font-size:.8rem}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{padding:25px;text-align:center;min-height:250px;display:flex;flex-direction:column;justify-content:space-between}
+  .icon{font-size:3rem;margin:4px 0 15px}
+  .card h3{margin:0 0 9px}
+  .card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+  .card .btn{padding:10px 14px;font-size:.85rem}
+
+  .letter{
+    padding:38px;
+    max-width:850px;margin:auto;
+    display:none;
+  }
+  .letter.show{display:block;animation:appear .45s ease}
+  @keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .letter h3{font-family:Pacifico,cursive;font-weight:400;font-size:2rem;color:var(--pink2)}
+  .letter p{line-height:2;color:#eadcf1}
+
+  .memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .memory{
+    min-height:160px;padding:25px;
+    display:flex;align-items:end;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.35)),
+      linear-gradient(135deg,rgba(255,117,185,.16),rgba(157,99,232,.15));
+  }
+  .memory h3{margin:0}
+  .memory p{margin:7px 0 0;color:var(--muted);font-size:.88rem}
+
+  footer{text-align:center;padding:60px 0 35px;color:var(--muted)}
+  footer .big{font-family:Pacifico,cursive;color:var(--pink2);font-size:1.7rem}
+
+  .modal{
+    position:fixed;inset:0;background:rgba(5,2,15,.75);
+    display:none;align-items:center;justify-content:center;padding:20px;z-index:20;
+    backdrop-filter:blur(7px);
+  }
+  .modal.open{display:flex}
+  .modal-box{width:min(620px,100%);padding:35px;position:relative;text-align:center}
+  .close{position:absolute;right:15px;top:12px;background:none;border:0;color:white;font-size:1.5rem;cursor:pointer}
+  #modalText{font-size:1.15rem;line-height:1.9;color:#ffe7f4}
+
+  .toast{
+    position:fixed;left:50%;bottom:25px;transform:translate(-50%,30px);
+    opacity:0;pointer-events:none;background:#25133b;border:1px solid var(--line);
+    padding:13px 18px;border-radius:999px;z-index:30;transition:.3s;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media(max-width:850px){
+    .hero{grid-template-columns:1fr;min-height:auto;padding-top:25px}
+    .sky-art{height:360px;order:-1}
+    .moon{width:180px;height:180px}
+    .cat{font-size:6rem}
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .bad-day{grid-template-columns:80px 1fr}
+    .bad-day .btn{grid-column:1/-1}
+  }
+  @media(max-width:550px){
+    header{padding:18px 0}
+    .music-btn{padding:9px 12px}
+    .hero{padding-bottom:25px}
+    .sky-art{height:300px}
+    h1{font-size:3.5rem}
+    .cards,.memory-grid{grid-template-columns:1fr}
+    .bad-day{grid-template-columns:1fr;text-align:center}
+    .bad-day .btn{grid-column:auto}
+    .surprise,.letter{padding:25px}
+  }
+</style>
+</head>
+
+<body>
+<div class="stars"></div>
+
+<div class="container">
+  <header>
+    <div class="brand"><span>♥</span> a little place for you</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">☾ from someone who wishes they were closer</div>
+        <h1>Good morning,<br><span id="herName">my love</span> ♡</h1>
+        <p>
+          I hope today is a little kinder to you.
+          Whatever happens today, remember that someone is cheering for you
+          from far away. Now go make today yours. 💗
+        </p>
+        <div class="hero-buttons">
+          <button class="btn primary" id="surpriseBtn">✦ Click for a little surprise</button>
+          <button class="btn secondary" onclick="document.getElementById('letter').scrollIntoView()">💌 Open your letter</button>
+        </div>
+      </div>
+
+      <div class="sky-art">
+        <div class="moon"></div>
+        <div class="heart h1">♥</div>
+        <div class="heart h2">♥</div>
+        <div class="heart h3">♥</div>
+        <div class="cloud">☁</div>
+        <div class="cat">🐈</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="glass surprise">
+        <div class="small">YOUR LITTLE REMINDER OF THE DAY</div>
+        <div id="surpriseText">You are stronger than you think, braver than you feel, and more loved than you'll ever know. ♡</div>
+        <button class="btn primary" id="nextMessage">another one ✨</button>
+      </div>
+
+      <div class="glass bad-day">
+        <div class="cloudy">🌧️</div>
+        <div>
+          <h3>Having a bad day?</h3>
+          <p>It's okay. You don't have to pretend everything is perfect. Take a breath. I'm here for you.</p>
+        </div>
+        <button class="btn" id="cheerBtn">hum 💗</button>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">A few things for you</h2>
+      <p class="section-sub">Because one little message isn't enough.</p>
+
+      <div class="cards">
+        <div class="glass card">
+          <div>
+            <div class="icon">💌</div>
+            <h3>A little letter</h3>
+            <p>Something I want you to remember whenever you need it.</p>
+          </div>
+          <button class="btn" onclick="openModal('letterModal')">open ♡</button>
+        </div>
+
+        <div class="glass card">
+          <div>
+            <div class="icon">📝</div>
+            <h3>Daily reminder</h3>
+            <p>You matter. More than you probably realize.</p>
+          </div>
+          <button class="btn" id="reminderBtn">read 💗</button>
+        </div>
+
+        <div class="glass card">
+          <div>
+            <div class="icon">✨</div>
+            <h3>Flirty little note</h3>
+            <p>A tiny reminder that you're dangerously easy to adore.</p>
+          </div>
+          <button class="btn" id="flirtyBtn">read ♡</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="letter">
+      <div class="glass letter" id="letterBox">
+        <div class="small">A LETTER FOR YOU</div>
+        <h3>Hey, you... ♡</h3>
+        <p>
+          I know sometimes days get heavy, and sometimes you just need someone
+          to remind you that you're doing okay.
+        </p>
+        <p>
+          So here's your reminder: you don't have to have everything figured
+          out. You don't have to be happy every second. Take things one step
+          at a time, and be patient with yourself.
+        </p>
+        <p>
+          Even though there's distance between us, I hope this little corner
+          of the internet can make you smile for a moment.
+        </p>
+        <p>
+          I'm always cheering for you. ♡
+        </p>
+        <p style="color:var(--pink2);font-weight:700">— someone who loves you very much</p>
+      </div>
+    </section>
+    <section id="photos">
+      <h2 class="section-title">Just you ♡</h2>
+      <p class="section-sub">Put your favorite pictures of her here. Replace the placeholders with your own photos.</p>
+      <div class="memory-grid">
+        <div class="glass memory"><div><h3>📸 Your favorite photo</h3><p>Replace this box with an &lt;img&gt; of her.</p></div></div>
+        <div class="glass memory"><div><h3>🌷 Another one</h3><p>A picture that always makes you smile.</p></div></div>
+        <div class="glass memory"><div><h3>💗 One more</h3><p>Your favorite picture of her goes here.</p></div></div>
+      </div>
+    </section>
+    </main>
+
+  <footer>
+    <div class="big">No matter how far we are, you're never alone. ♡</div>
+    <p>Made with a ridiculous amount of love · for you, today and always</p>
+  </footer>
+</div>
+
+<div class="modal" id="letterModal" onclick="if(event.target===this)closeModal('letterModal')">
+  <div class="glass modal-box">
+    <button class="close" onclick="closeModal('letterModal')">×</button>
+    <div style="font-size:3rem">💌</div>
+    <h2 class="section-title">A tiny reminder</h2>
+    <p id="modalText">
+      You don't need to earn rest, kindness, or love. Be gentle with yourself today.
+      And if today isn't your day, that's okay. Tomorrow gets another chance. ♡
+    </p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  /* =========================================================
+     ✏️ PERSONALIZE THESE 3 THINGS
+     ========================================================= */
+
+  const HER_NAME = "my love";
+
+  // Put your reunion date here.
+  // Example: new Date("2027-06-20T18:00:00")
+  const REUNION_DATE = new Date("2027-06-20T18:00:00");
+
+
+  /* ========================================================= */
+
+  document.getElementById("herName").textContent = HER_NAME;
+
+  const messages = [
+    "You are stronger than you think, and you have already made it through every hard day before this one. ♡",
+    "You don't have to be perfect today. Just take things one step at a time. 🌷",
+    "I hope you remember how capable you are, even on the days when you don't feel it.",
+    "Tiny progress is still progress. Be proud of yourself for trying. ✨",
+    "You deserve kindness from yourself too. Please don't be harder on yourself than you need to be.",
+    "Whatever today brings, you can handle it one little piece at a time. 💗",
+    "I'm rooting for you from my little corner of the world. Always. 🌙",
+    "You have no idea how easy it is for you to make me smile. It's honestly unfair. 😭💗",
+    "If being adorable was a competition, I'd already know who I'd bet on. ♡",
+    "Just a reminder: somewhere out there is someone who thinks you're ridiculously cute.",
+    "I hope your day goes well, but if it doesn't, you can always come back here for a tiny dose of me being annoying. 😌",
+    "How are you this cute and still somehow getting things done? Show-off. 💕",
+    "You make distance feel a little less distant. That's pretty special.",
+    "Official reminder: you're allowed to rest, laugh, take breaks, and enjoy the little things today. 🌸"
+  ];
+
+  const cheerMessages = [
+    "Hum. 🥺💗 That's the signal. Come here for a tiny reminder that you're doing okay.",
+    "Hum detected. Emergency cuteness protocol activated. You are officially allowed to take a break. ♡",
+    "Hum. 🌧️➡️🌤️ Whatever happened, you don't have to fix everything right now.",
+    "Hum means you get one tiny reminder: you're loved, you're capable, and tomorrow is another chance.",
+    "Okay, hum. Breathe. Unclench your shoulders. Drink some water. You've got this. 🫶",
+    "Hum received. Sending you an imaginary blanket, a warm drink, and approximately 500 tiny supportive thoughts. 💗"
+  ];
+
+  let messageIndex = 0;
+
+  function showMessage(){
+    const box = document.getElementById("surpriseText");
+    messageIndex = (messageIndex + 1) % messages.length;
+    box.animate(
+      [{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"translateY(0)"}],
+      {duration:350,easing:"ease-out"}
+    );
+    box.textContent = messages[messageIndex];
+  }
+
+  document.getElementById("surpriseBtn").addEventListener("click",()=>{
+    showMessage();
+    document.querySelector(".surprise").scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  document.getElementById("nextMessage").addEventListener("click",showMessage);
+
+  document.getElementById("cheerBtn").addEventListener("click",()=>{
+    const msg = cheerMessages[Math.floor(Math.random()*cheerMessages.length)];
+    showToast(msg);
+  });
+
+  document.getElementById("reminderBtn").addEventListener("click",()=>{
+    showToast("Daily reminder: you matter so, so much. 💗");
+  });
+
+  const flirtyMessages = [
+    "I was going to write something smooth, but then I remembered you're cute and completely distracted me. 😭",
+    "You somehow manage to be my favorite notification. That's a serious achievement. ♡",
+    "I hope you know that being this adorable should probably be illegal.",
+    "If I could send you a smile through the screen, you'd be stuck with one all day. 💗",
+    "Not to be dramatic, but you being you is one of my favorite things.",
+    "You make it very difficult to act normal sometimes. 😭💕"
+  ];
+
+  document.getElementById("flirtyBtn").addEventListener("click",()=>{
+    showToast(flirtyMessages[Math.floor(Math.random()*flirtyMessages.length)]);
+  });
+
+  function openModal(id){document.getElementById(id).classList.add("open")}
+  function closeModal(id){document.getElementById(id).classList.remove("open")}
+
+  function showToast(text){
+    const toast=document.getElementById("toast");
+    toast.textContent=text;
+    toast.classList.add("show");
+    clearTimeout(window.toastTimer);
+    window.toastTimer=setTimeout(()=>toast.classList.remove("show"),3500);
+  }
+
+  /* Simple lo-fi style ambient sound using Web Audio.
+     It creates a quiet tone; no external audio file is needed. */
+  let audioCtx=null, musicOn=false, musicNodes=[];
+  document.getElementById("musicBtn").addEventListener("click",()=>{
+    const btn=document.getElementById("musicBtn");
+    if(!musicOn){
+      audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+      const master=audioCtx.createGain();
+      master.gain.value=.035;
+      master.connect(audioCtx.destination);
+
+      [196,246.94,293.66,369.99].forEach((freq,i)=>{
+        const osc=audioCtx.createOscillator();
+        const gain=audioCtx.createGain();
+        osc.type="sine";
+        osc.frequency.value=freq;
+        gain.gain.value=.12;
+        osc.connect(gain);gain.connect(master);
+        osc.start();
+        musicNodes.push(osc,gain);
+      });
+      musicOn=true;
+      btn.textContent="♫ lo-fi playing";
+      showToast("A tiny soundtrack for your day ♫");
+    }else{
+      musicNodes.forEach(n=>{try{n.stop?.()}catch(e){} try{n.disconnect()}catch(e){}});
+      musicNodes=[];
+      audioCtx?.close();
+      audioCtx=null;
+      musicOn=false;
+      btn.textContent="♫ Play lo-fi";
+    }
+  });
+
+  // Make the letter appear when its section is reached.
+  const letterBox=document.getElementById("letterBox");
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting) letterBox.classList.add("show")});
+  },{threshold:.2});
+  observer.observe(letterBox);
+</script>
+</body>
+</html>
